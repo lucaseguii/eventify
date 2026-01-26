@@ -1,0 +1,38 @@
+/* ==== FOOTER ==== */
+
+.footer {
+    background: #020617;
+    color: #9ca3af;
+    padding: 1.5rem 0;
+    font-size: 0.85rem;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer a {
+    color: #9ca3af;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
