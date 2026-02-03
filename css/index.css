@@ -1,76 +1,95 @@
 /* ==== HERO ==== */
 
 .hero {
-    background: radial-gradient(circle at top left, #1d4ed8 0, #0f172a 45%, #020617 100%);
+    padding: 4.8rem 0 3.8rem;
     color: #e5e7eb;
-    padding: 4.5rem 0 3.5rem;
+
+    /* Fondo más "pro" con glow y profundidad */
+    background:
+        radial-gradient(900px 520px at 15% 20%, rgba(99, 102, 241, 0.35), transparent 60%),
+        radial-gradient(820px 520px at 85% 30%, rgba(168, 85, 247, 0.28), transparent 60%),
+        linear-gradient(180deg, #0f172a 0%, #0b1220 70%, #070b14 100%);
 }
 
 .hero-content {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 2.3rem;
     align-items: center;
 }
 
 .hero-text h1 {
-    font-size: clamp(2rem, 3vw + 1rem, 2.8rem);
-    line-height: 1.1;
+    font-size: clamp(2.1rem, 3.2vw + 1rem, 3.05rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
     margin-bottom: 1rem;
 }
 
 .hero-text p {
-    font-size: 0.98rem;
-    max-width: 32rem;
-    color: #cbd5f5;
+    font-size: 1.05rem;
+    max-width: 36rem;
+    color: rgba(229, 231, 235, 0.82);
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.8rem;
     margin: 1.6rem 0 0.6rem;
 }
 
+/* Hero card */
 .hero-card {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius);
-    padding: 1.5rem 1.4rem;
-    box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 1.35rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
 }
 
 .hero-card h2 {
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin-bottom: 0.9rem;
+    color: #f3f4f6;
 }
 
 /* event list dentro del hero */
-
 .event-list {
     list-style: none;
-    margin-bottom: 0.8rem;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
 }
 
 .event-item {
-    padding: 0.45rem 0;
-    border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
+    padding: 0.75rem 0.85rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .event-name {
-    font-size: 0.9rem;
-    color: #e5e7eb;
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f9fafb;
 }
 
 .event-meta {
-    font-size: 0.78rem;
-    color: #9ca3af;
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: rgba(229, 231, 235, 0.72);
 }
 
 .link {
-    font-size: 0.85rem;
-    color: #a5b4fc;
+    font-size: 0.9rem;
+    color: rgba(229, 231, 235, 0.9);
     text-decoration: none;
+    font-weight: 600;
 }
 
 .link:hover {
@@ -84,11 +103,10 @@
 }
 
 .section-alt {
-    background: #f9fafb;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
 
 /* tarjetas paso a paso */
-
 .step-card {
     position: relative;
     padding-top: 2.2rem;
@@ -107,7 +125,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* ====== RESPONSIVE ====== */

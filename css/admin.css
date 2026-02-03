@@ -1,0 +1,29 @@
+.admin-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.big-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: var(--color-text);
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.admin-card {
+    margin-top: 1.6rem;
+}

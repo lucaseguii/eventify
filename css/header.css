@@ -72,7 +72,13 @@
     gap: 0.6rem;
 }
 
-/* Responsive header */
+.user-hello {
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    opacity: 0.9;
+    margin-right: 0.4rem;
+    white-space: nowrap;
+}
 
 @media (max-width: 720px) {
     .header-content {

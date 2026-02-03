@@ -1,0 +1,9 @@
+.event-location,
+.event-date {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+}
+
+.card p {
+    margin-top: 0.4rem;
+}
