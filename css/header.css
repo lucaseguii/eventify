@@ -17,33 +17,19 @@
     gap: 1rem;
 }
 
-/* LOGO */
-
-.logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-}
-
-.logo-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #4f46e5, #a855f7);
-    color: white;
-    font-size: 1rem;
-}
-
 .logo-text {
-    font-size: 1.05rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+.logo-text::first-letter {
+    text-transform: uppercase;
+}
+
 
 /* NAV */
 
@@ -79,6 +65,8 @@
     margin-right: 0.4rem;
     white-space: nowrap;
 }
+
+
 
 @media (max-width: 720px) {
     .header-content {

@@ -7,7 +7,6 @@ if (session_status() === PHP_SESSION_NONE) {
 <header class="header">
     <div class="container header-content">
         <a href="../src/index.php" class="logo">
-            <span class="logo-mark">E</span>
             <span class="logo-text">Eventify</span>
         </a>
 
