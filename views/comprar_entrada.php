@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../config/seguridad.php";
 require_once __DIR__ . "/../config/conexion.php";
 
-// Hay que estar logueado para comprar
 require_login();
 
 $id_evento = (int)($_GET["id"] ?? 0);
@@ -11,7 +10,6 @@ if ($id_evento <= 0) {
     exit;
 }
 
-// Obtener el evento
 $stmt = $conexion->prepare("SELECT id, titulo, descripcion, lugar, fecha_evento, aforo FROM eventos WHERE id = ? LIMIT 1");
 $stmt->bind_param("i", $id_evento);
 $stmt->execute();
@@ -23,7 +21,7 @@ if (!$evento) {
     exit;
 }
 
-// Calcular entradas ya compradas (sum cantidad)
+
 $stmt = $conexion->prepare("SELECT COALESCE(SUM(cantidad), 0) AS vendidas FROM entradas WHERE id_evento = ?");
 $stmt->bind_param("i", $id_evento);
 $stmt->execute();
@@ -44,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($cantidad > $disponibles) {
         $error = "No hi ha prou entrades disponibles. Disponibles: " . $disponibles;
     } else {
-        // Guardar compra
         $stmt = $conexion->prepare("INSERT INTO entradas (id_evento, id_usuario, cantidad) VALUES (?, ?, ?)");
         $stmt->bind_param("iii", $id_evento, $id_usuario, $cantidad);
 

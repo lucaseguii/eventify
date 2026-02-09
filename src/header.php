@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <nav class="nav">
             <a href="../src/index.php#com-funciona">Com funciona</a>
             <a href="../src/index.php#esdeveniments">Esdeveniments</a>
-            <a href="../views/mis_entradas.php">Mis entradas</a>
+            <a href="../views/mis_entradas.php">Les meves entrades</a>
             <a href="../views/contacte.php">Contacte</a>
         </nav>
 

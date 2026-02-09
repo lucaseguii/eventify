@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../config/seguridad.php";
 require_once __DIR__ . "/../config/conexion.php";
 
-// Organizador o admin
 require_roles(["organizador", "admin"]);
 
 $error = "";

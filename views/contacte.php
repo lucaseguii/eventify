@@ -16,11 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif (!filter_var($correu, FILTER_VALIDATE_EMAIL)) {
         $error = "El correu no és vàlid.";
     } else {
-        // ✅ Per al TFG: de moment no guardem res a BD ni enviem email.
-        // Més endavant podem guardar-ho a una taula "contactes" o enviar correu.
+
         $ok = "Missatge enviat correctament ✅ Ens posarem en contacte amb tu aviat.";
 
-        // Netejar camps
+      
         $nom = $correu = $missatge = "";
     }
 }

@@ -2,12 +2,10 @@
 require_once __DIR__ . "/../config/seguridad.php";
 require_once __DIR__ . "/../config/conexion.php";
 
-// Organizador o admin
 require_roles(["organizador", "admin"]);
 
 $id_usuario = (int)$_SESSION["usuario_id"];
 
-// Listar eventos del organizador (si admin, listamos todos)
 if (($_SESSION["usuario_rol"] ?? "") === "admin") {
     $sql = "SELECT e.id, e.titulo, e.lugar, e.fecha_evento, e.aforo, u.nombre AS organizador
             FROM eventos e

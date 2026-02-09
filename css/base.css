@@ -135,7 +135,6 @@ main {
 }
 
 
-/* Outline (por defecto: fondos claros) */
 .btn-outline {
     background: transparent;
     color: #111827;
@@ -148,7 +147,6 @@ main {
     border-color: #111827;
 }
 
-/* Outline en zonas oscuras (header y hero) */
 .header .btn-outline,
 .hero .btn-outline {
     color: #f9fafb;
@@ -173,7 +171,6 @@ main {
     gap: 0.6rem;
 }
 
-/* SECCIONES GENERALES */
 
 .section {
     padding: 3.5rem 0;
@@ -194,7 +191,6 @@ main {
     margin-bottom: 1.8rem;
 }
 
-/* GRID GENERICO */
 
 .grid-3 {
     display: grid;
@@ -202,7 +198,6 @@ main {
     gap: 1.6rem;
 }
 
-/* CARDS GENERICAS */
 
 .card {
     background: var(--color-card);
@@ -243,7 +238,6 @@ main {
     color: #4b5563;
 }
 
-/* TARJETAS DE EVENTO GENERICAS */
 
 .event-card .event-location,
 .event-card .event-date {
@@ -256,7 +250,6 @@ main {
     margin: 0.7rem 0 1rem;
 }
 
-/* CONTACTO GENÉRICO */
 
 .contact-grid {
     display: grid;
@@ -294,7 +287,6 @@ main {
     box-shadow: 0 0 0 1px var(--color-primary-soft);
 }
 
-/* FOOTER */
 
 .footer {
     background: #020617;
@@ -324,7 +316,6 @@ main {
     text-decoration: underline;
 }
 
-/* RESPONSIVE GENERAL */
 
 @media (max-width: 900px) {
     .grid-3 {
@@ -342,7 +333,7 @@ main {
     }
 
     .nav {
-        display: none; /* más adelante menú hamburguesa */
+        display: none; 
     }
 
     .auth-buttons {

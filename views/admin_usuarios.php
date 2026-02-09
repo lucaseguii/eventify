@@ -2,13 +2,11 @@
 require_once __DIR__ . "/../config/seguridad.php";
 require_once __DIR__ . "/../config/conexion.php";
 
-// Solo admin
 require_rol("admin");
 
 $mensaje = "";
 $error = "";
 
-/* --- Cambiar rol --- */
 if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["accion"] ?? "") === "cambiar_rol") {
     $id = (int)($_POST["id"] ?? 0);
     $rol = $_POST["rol"] ?? "";
@@ -16,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["accion"] ?? "") === "cambi
     if ($id <= 0 || !in_array($rol, ["asistente", "organizador", "admin"], true)) {
         $error = "Datos inválidos.";
     } else {
-        // Evitar que el admin se quite a sí mismo el rol sin querer (opcional)
         if ($id === (int)$_SESSION["usuario_id"] && $rol !== "admin") {
             $error = "No pots treure’t el rol d’admin a tu mateix.";
         } else {
@@ -56,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["accion"] ?? "") === "borra
     }
 }
 
-/* --- Listado usuarios --- */
 $res = $conexion->query("SELECT id, nombre, correo, rol, fecha_creacion FROM usuarios ORDER BY id DESC");
 ?>
 <!DOCTYPE html>

@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . "/../config/conexion.php";
 
-// Si ya está logueado, lo mandamos a la home
 if (isset($_SESSION["usuario_id"])) {
     header("Location: ../src/index.php");
     exit;
@@ -17,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($correo === "" || $contrasena === "") {
         $error = "Rellena el correo y la contraseña.";
     } else {
-        // Buscar usuario por correo
+    
         $stmt = $conexion->prepare("SELECT id, nombre, correo, contrasena, rol FROM usuarios WHERE correo = ? LIMIT 1");
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -28,9 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!$usuario) {
             $error = "El correo no existe.";
         } else {
-            // Verificar contraseña (guardada con password_hash)
             if (password_verify($contrasena, $usuario["contrasena"])) {
-                // Login OK -> guardar sesión
                 $_SESSION["usuario_id"] = $usuario["id"];
                 $_SESSION["usuario_nombre"] = $usuario["nombre"];
                 $_SESSION["usuario_correo"] = $usuario["correo"];

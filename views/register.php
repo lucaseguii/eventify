@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . "/../config/conexion.php";
 
-// Si ya está logueado, lo mandamos a la home
 if (isset($_SESSION["usuario_id"])) {
     header("Location: ../src/index.php");
     exit;
@@ -17,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $contrasena2 = $_POST["contrasena2"] ?? "";
     $rol = $_POST["rol"] ?? "asistente";
 
-    // Validaciones básicas
     if ($nombre === "" || $correo === "" || $contrasena === "" || $contrasena2 === "") {
         $error = "Rellena todos los campos.";
     } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
@@ -27,10 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($contrasena !== $contrasena2) {
         $error = "Las contraseñas no coinciden.";
     } elseif (!in_array($rol, ["asistente", "organizador"], true)) {
-        // Por seguridad: solo permitimos elegir asistente u organizador
         $error = "Rol no válido.";
     } else {
-        // ¿Existe ya el correo?
         $stmt = $conexion->prepare("SELECT id FROM usuarios WHERE correo = ? LIMIT 1");
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -51,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($stmt->execute()) {
                 $stmt->close();
 
-                // Auto-login después de registrarse (opcional, pero cómodo)
                 $nuevo_id = $conexion->insert_id;
                 $_SESSION["usuario_id"] = $nuevo_id;
                 $_SESSION["usuario_nombre"] = $nombre;

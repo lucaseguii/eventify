@@ -2,7 +2,7 @@
 session_start();
 require_once __DIR__ . "/../config/conexion.php";
 
-// Proteger: solo admins
+
 if (!isset($_SESSION["usuario_id"]) || ($_SESSION["usuario_rol"] ?? "") !== "admin") {
     header("Location: login.php");
     exit;

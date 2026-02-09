@@ -1,10 +1,8 @@
-/* ==== HERO ==== */
 
 .hero {
     padding: 4.8rem 0 3.8rem;
     color: #e5e7eb;
 
-    /* Fondo más "pro" con glow y profundidad */
     background:
         radial-gradient(900px 520px at 15% 20%, rgba(99, 102, 241, 0.35), transparent 60%),
         radial-gradient(820px 520px at 85% 30%, rgba(168, 85, 247, 0.28), transparent 60%),
@@ -38,7 +36,6 @@
     margin: 1.6rem 0 0.6rem;
 }
 
-/* Hero card */
 .hero-card {
     background: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius);
@@ -54,7 +51,6 @@
     color: #f3f4f6;
 }
 
-/* event list dentro del hero */
 .event-list {
     list-style: none;
     margin: 0;
@@ -96,7 +92,6 @@
     text-decoration: underline;
 }
 
-/* ==== SECCIONES GENERALES ==== */
 
 .section {
     padding: 3.5rem 0;
@@ -106,7 +101,6 @@
     background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
 
-/* tarjetas paso a paso */
 .step-card {
     position: relative;
     padding-top: 2.2rem;
@@ -128,7 +122,6 @@
     font-weight: 700;
 }
 
-/* ====== RESPONSIVE ====== */
 
 @media (max-width: 900px) {
     .hero-content {
