@@ -122,6 +122,14 @@
     font-weight: 700;
 }
 
+.event-price {
+    font-weight: 700;
+    margin: 0.4rem 0 0.8rem;
+    color: var(--color-text);
+}
+.hero .event-price {
+     color: #e5e7eb;
+}
 
 @media (max-width: 900px) {
     .hero-content {

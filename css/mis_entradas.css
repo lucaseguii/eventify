@@ -7,3 +7,6 @@
 .card p {
     margin-top: 0.4rem;
 }
+.card p strong {
+    color: #111827;
+}

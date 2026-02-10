@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-/* Botón "Crea un esdeveniment" según rol */
 $href_crear = "../views/login.php";
 if (isset($_SESSION["usuario_id"])) {
     $rol = $_SESSION["usuario_rol"] ?? "";
@@ -16,15 +15,13 @@ if (isset($_SESSION["usuario_id"])) {
     }
 }
 
-/* Eventos para sección principal (9) */
-$sql = "SELECT id, titulo, lugar, fecha_evento, descripcion
+$sql = "SELECT id, titulo, lugar, fecha_evento, descripcion, precio
         FROM eventos
         ORDER BY fecha_evento DESC
         LIMIT 9";
 $resultado_eventos = $conexion->query($sql);
 
-/* Eventos destacados (3 próximos) */
-$sql_destacados = "SELECT id, titulo, lugar, fecha_evento
+$sql_destacados = "SELECT id, titulo, lugar, fecha_evento, precio
                    FROM eventos
                    WHERE fecha_evento >= NOW()
                    ORDER BY fecha_evento ASC
@@ -84,6 +81,13 @@ $resultado_destacados = $conexion->query($sql_destacados);
                                         $lugar = $d["lugar"] ?: "Sense ubicació";
                                         $dt = new DateTime($d["fecha_evento"]);
                                         echo htmlspecialchars($lugar . " · " . $dt->format("d/m/Y H:i"));
+                                    ?>
+                                </span>
+
+                                <span class="event-price">
+                                    <?php
+                                        $precio = (float)($d["precio"] ?? 0);
+                                        echo ($precio <= 0) ? "Gratuït" : number_format($precio, 2) . " €";
                                     ?>
                                 </span>
                             </li>
@@ -155,6 +159,13 @@ $resultado_destacados = $conexion->query($sql_destacados);
                                 <?php
                                     $desc = trim($ev["descripcion"] ?? "");
                                     echo htmlspecialchars($desc !== "" ? $desc : "Sense descripció.");
+                                ?>
+                            </p>
+
+                            <p class="event-price">
+                                <?php
+                                    $precio = (float)($ev["precio"] ?? 0);
+                                    echo ($precio <= 0) ? "Gratuït" : number_format($precio, 2) . " €";
                                 ?>
                             </p>
 

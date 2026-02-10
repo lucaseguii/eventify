@@ -10,7 +10,12 @@ if ($id_evento <= 0) {
     exit;
 }
 
-$stmt = $conexion->prepare("SELECT id, titulo, descripcion, lugar, fecha_evento, aforo FROM eventos WHERE id = ? LIMIT 1");
+$stmt = $conexion->prepare(
+    "SELECT id, titulo, descripcion, lugar, fecha_evento, aforo, precio
+     FROM eventos
+     WHERE id = ?
+     LIMIT 1"
+);
 $stmt->bind_param("i", $id_evento);
 $stmt->execute();
 $evento = $stmt->get_result()->fetch_assoc();
@@ -21,8 +26,11 @@ if (!$evento) {
     exit;
 }
 
-
-$stmt = $conexion->prepare("SELECT COALESCE(SUM(cantidad), 0) AS vendidas FROM entradas WHERE id_evento = ?");
+$stmt = $conexion->prepare(
+    "SELECT COALESCE(SUM(cantidad), 0) AS vendidas
+     FROM entradas
+     WHERE id_evento = ?"
+);
 $stmt->bind_param("i", $id_evento);
 $stmt->execute();
 $vendidas = (int)($stmt->get_result()->fetch_assoc()["vendidas"] ?? 0);
@@ -31,7 +39,10 @@ $stmt->close();
 $aforo = (int)$evento["aforo"];
 $disponibles = max(0, $aforo - $vendidas);
 
+$precio = (float)($evento["precio"] ?? 0);
+
 $error = "";
+$cantidad = 1;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cantidad = (int)($_POST["cantidad"] ?? 0);
@@ -42,7 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($cantidad > $disponibles) {
         $error = "No hi ha prou entrades disponibles. Disponibles: " . $disponibles;
     } else {
-        $stmt = $conexion->prepare("INSERT INTO entradas (id_evento, id_usuario, cantidad) VALUES (?, ?, ?)");
+        $stmt = $conexion->prepare(
+            "INSERT INTO entradas (id_evento, id_usuario, cantidad)
+             VALUES (?, ?, ?)"
+        );
         $stmt->bind_param("iii", $id_evento, $id_usuario, $cantidad);
 
         if ($stmt->execute()) {
@@ -56,6 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->close();
     }
 }
+
+$total = ($precio <= 0) ? 0 : ($precio * $cantidad);
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p class="section-subtitle">
                 <?php
                     $dt = new DateTime($evento["fecha_evento"]);
-                    echo htmlspecialchars(($evento["lugar"] ?: "Sense ubicació") . " · " . $dt->format("d/m/Y H:i"));
+                    echo htmlspecialchars(
+                        ($evento["lugar"] ?: "Sense ubicació") . " · " . $dt->format("d/m/Y H:i")
+                    );
                 ?>
             </p>
 
@@ -100,6 +118,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div>
                     <p class="label">Disponibles</p>
                     <p class="value"><?php echo $disponibles; ?></p>
+                </div>
+                <div>
+                    <p class="label">Preu per entrada</p>
+                    <p class="value">
+                        <?php echo ($precio <= 0) ? "Gratuït" : number_format($precio, 2) . " €"; ?>
+                    </p>
                 </div>
             </div>
 
@@ -120,8 +144,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <form method="POST" class="comprar-form">
                     <label>
                         Quantitat d’entrades
-                        <input type="number" name="cantidad" min="1" max="<?php echo $disponibles; ?>" value="1" required />
+                        <input
+                            id="cantidad"
+                            type="number"
+                            name="cantidad"
+                            min="1"
+                            max="<?php echo $disponibles; ?>"
+                            value="<?php echo (int)$cantidad; ?>"
+                            required
+                        />
                     </label>
+
+                    <p class="total-line">
+                        <strong>Total:</strong>
+                        <span id="totalText" data-precio="<?php echo htmlspecialchars((float)$precio); ?>">
+                            <?php echo ($precio <= 0) ? "Gratuït" : number_format($total, 2) . " €"; ?>
+                        </span>
+                    </p>
 
                     <div class="actions">
                         <button type="submit" class="btn btn-primary">Confirmar compra</button>
@@ -136,6 +175,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </main>
 
 <?php include_once __DIR__ . "/../src/footer.php"; ?>
+
+<script src="../js/comprar.js"></script>
 
 </body>
 </html>

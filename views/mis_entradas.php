@@ -11,6 +11,7 @@ $sql = "
         e.titulo,
         e.lugar,
         e.fecha_evento,
+        e.precio,
         en.cantidad,
         en.fecha_compra
     FROM entradas en
@@ -54,6 +55,11 @@ $stmt->close();
         <?php else: ?>
             <div class="grid-3">
                 <?php while ($e = $resultado->fetch_assoc()): ?>
+                    <?php
+                        $precio = (float)($e["precio"] ?? 0);
+                        $cantidad = (int)($e["cantidad"] ?? 0);
+                        $total = ($precio <= 0) ? 0 : ($precio * $cantidad);
+                    ?>
                     <div class="card">
                         <h3><?php echo htmlspecialchars($e["titulo"]); ?></h3>
 
@@ -68,7 +74,15 @@ $stmt->close();
                             ?>
                         </p>
 
-                        <p><strong>Entrades:</strong> <?php echo (int)$e["cantidad"]; ?></p>
+                        <p><strong>Entrades:</strong> <?php echo $cantidad; ?></p>
+
+                        <p><strong>Preu per entrada:</strong>
+                            <?php echo ($precio <= 0) ? "Gratuït" : number_format($precio, 2) . " €"; ?>
+                        </p>
+
+                        <p><strong>Total:</strong>
+                            <?php echo ($precio <= 0) ? "Gratuït" : number_format($total, 2) . " €"; ?>
+                        </p>
 
                         <p class="section-subtitle" style="margin-bottom:0;">
                             Comprades el <?php echo htmlspecialchars($e["fecha_compra"]); ?>

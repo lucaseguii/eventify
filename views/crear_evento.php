@@ -13,6 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lugar = trim($_POST["lugar"] ?? "");
     $fecha_evento = trim($_POST["fecha_evento"] ?? "");
     $aforo = (int)($_POST["aforo"] ?? 0);
+    $precio = (float)($_POST["precio"] ?? 0);
+
+    if ($precio < 0) {
+        $precio = 0;
+    }
 
     if ($titulo === "" || $fecha_evento === "" || $aforo <= 0) {
         $error = "Títol, data i aforament són obligatoris (aforament > 0).";
@@ -20,10 +25,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $id_organizador = (int)$_SESSION["usuario_id"];
 
         $stmt = $conexion->prepare(
-            "INSERT INTO eventos (id_organizador, titulo, descripcion, lugar, fecha_evento, aforo)
-             VALUES (?, ?, ?, ?, ?, ?)"
+            "INSERT INTO eventos (id_organizador, titulo, descripcion, lugar, fecha_evento, aforo, precio)
+             VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
-        $stmt->bind_param("issssi", $id_organizador, $titulo, $descripcion, $lugar, $fecha_evento, $aforo);
+        $stmt->bind_param(
+            "issssid",
+            $id_organizador,
+            $titulo,
+            $descripcion,
+            $lugar,
+            $fecha_evento,
+            $aforo,
+            $precio
+        );
 
         if ($stmt->execute()) {
             $ok = "Esdeveniment creat correctament";
@@ -84,6 +98,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <label>
                         Aforament *
                         <input type="number" name="aforo" min="1" required />
+                    </label>
+
+                    <label>
+                        Preu (€)
+                        <input type="number" name="precio" min="0" step="0.01" value="0" />
                     </label>
 
                     <label class="full">
