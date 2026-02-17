@@ -61,8 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($stmt->execute()) {
             $stmt->close();
-            header("Location: mis_entradas.php");
-            exit;
+header("Location: qr_simulat.php?cantidad=" . $cantidad);
+exit;
+
         } else {
             $error = "Error al registrar la compra.";
         }

@@ -87,6 +87,9 @@ $stmt->close();
                         <p class="section-subtitle" style="margin-bottom:0;">
                             Comprades el <?php echo htmlspecialchars($e["fecha_compra"]); ?>
                         </p>
+                        <a href="qr_simulat.php" class="btn btn-outline btn-small" style="margin-top:.8rem;">
+  Veure QR
+</a>
                     </div>
                 <?php endwhile; ?>
             </div>

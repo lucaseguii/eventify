@@ -69,7 +69,7 @@ if ($res) {
                     <h3>Accions ràpides</h3>
                     <div class="admin-actions">
                         <a class="btn btn-primary btn-full" href="admin_usuarios.php">Gestionar usuaris</a>
-                        <a class="btn btn-primary btn-full" href="#">Gestionar esdeveniments</a>
+<a href="admin_esdeveniments.php" class="btn btn-outline">Gestionar esdeveniments</a>
                     </div>
                 </div>
             </div>
